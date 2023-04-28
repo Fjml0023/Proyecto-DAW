@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<div class="p-3 text-bg-dark">
+    <div class="cabecera">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><ui:insert name="Logo_BiblioUJAapp"><h:link outcome="/paginaprincipal.xhtml"><h:graphicImage name="Logo_sin_fondo.png" library="imagenes" height="60" title="Pagina principal" /></h:link></ui:insert></li>
+                <li><a href="https://www.ujaen.es/" class="nav-link px-2 text-white">Ujaen</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Mis Reservas</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Horarios</a></li>
+                <!--<li><h:link value="Horarios" outcome="horarios"/></li>-->
+            </ul>
+
+            <div class="text-end">
+                <a href="../../paginaprincipal.xhtml"><button type="button" class="btn btn-outline-light me-2">Iniciar Sesión</button></a>
+                <a href="../../usuarios/formulario_de_registro.xhtml"><button type="button" class="btn btn-outline-light me-2">Registrarse</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

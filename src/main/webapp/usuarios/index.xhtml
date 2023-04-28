@@ -1,0 +1,64 @@
+<!--listará todas las salas del catálogo-->
+<ui:composition
+        template="/WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:define name="metadata">
+        <title>usuarios.index </title>
+    </ui:define>
+
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+
+        <h1>Lista de usuarios</h1>
+
+        <h:form id="lista1">
+            <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <h:inputText id="Subcadena" value="#{ctrlUsuarios.busca}" pt:placeholder="Buscar por nombre" required="false"/>
+                <h:commandButton class="btn btn-outline-primary btn-sm" action="#{ctrlUsuarios.recuperaCadena()}" value="Buscar" update="lista1"/>
+                <h:commandButton type="button" class="btn btn-outline-secondary btn-sm" value="Limpiar" onclick="document.getElementById('lista1:Subcadena').value='';"/>
+            </div>
+            <br/>
+            <ul>
+                <p:dataTable id="lista" var="usuario" value="#{ctrlUsuarios.usuariostemp}">
+                    <p:column headerText="ID" sortBy="#{usuario.id}">
+                        #{usuario.id}
+                    </p:column>
+                    <p:column headerText="Nombre" sortBy="#{usuario.nombre}">
+                        #{usuario.nombre}
+                    </p:column>
+                    <p:column headerText="Contraseña" sortBy="#{usuario.contrasena}">
+                        #{usuario.contrasena}
+                    </p:column>
+                    <p:column headerText="DNI" sortBy="#{usuario.dni}">
+                        #{usuario.dni}
+                    </p:column>
+                    <p:column headerText="Email" sortBy="#{usuario.email}">
+                        #{usuario.email}
+                    </p:column>
+                    <p:column headerText="Fecha de nacimiento" sortBy="#{usuario.fnac}">
+                        #{usuario.fnac}
+                    </p:column>
+                    <p:column headerText="Opciones">
+                        <p:button icon="pi pi-search" title="Detalle" outcome="visualiza"><f:param name="id" value="#{usuario.id}" /></p:button>&#160;
+                        <p:commandButton icon="pi pi-trash" title="Borrar" action="#{ctrlUsuarios.borra(usuario)}" update="lista"/>
+                    </p:column>
+                </p:dataTable>
+            </ul>
+        </h:form>
+        <div class="small" ><div class="text-center">Numero total de usuarios es: #{ctrlUsuarios.numUsuarios()}</div></div>
+        <br/>
+        <div class="text-center"><h:button class="w-90 btn btn-lg btn-primary" value="Dar de alta un usuario" outcome="/usuarios/formulario_de_registro"/></div>
+    </ui:define>
+
+</ui:composition>
+
+

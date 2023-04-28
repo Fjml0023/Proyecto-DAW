@@ -1,0 +1,16 @@
+.reserva{
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    min-width: 720px;
+}
+.formulario_reserva{
+    margin: auto;
+    width: 100%;
+    min-width: 300px;
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 350px 350px;
+    gap: 10px;
+}

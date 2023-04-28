@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <context-param>
+        <param-name>jakarta.faces.PROJECT_STAGE</param-name>
+        <!-- Enable verbose error messages -->
+        <param-value>Development</param-value>
+        <!-- Other values: Production, SystemTest, UnitTest -->
+    </context-param>
+
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+
+    <!-- error-code related error pages -->
+    <error-page>
+        <!-- Page not found -->
+        <error-code>404</error-code>
+        <location>/WEB-INF/Paginas_de_error/not_found.html</location>
+    </error-page>
+
+    <!-- Base de Datos -->
+    <data-source>
+        <name>java:global/jdbc/libros</name> <!-- JNDI resource -->
+        <class-name>org.h2.jdbcx.JdbcDataSource</class-name> <!-- Driver -->
+        <url>jdbc:h2:~/h2db/dawlibros;MODE=LEGACY;AUTO_SERVER=TRUE</url> <!--DB in user folder -->
+        <user>dawuser</user>
+        <password>dawuser</password>
+        <initial-pool-size>2</initial-pool-size>
+        <max-pool-size>10</max-pool-size>
+        <min-pool-size>5</min-pool-size>
+    </data-source>
+
+    <session-config>
+        <session-timeout> 30 </session-timeout> <!-- tiempo de inactividad -->
+        <cookie-config>
+            <http-only>true</http-only> <!-- evita acceso desde javascript -->
+            <secure>false</secure> <!-- true para forzar enviar por conexión segura TLS-->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode> <!-- desactiva id de sesión en urls -->
+    </session-config>
+
+    <!-- Roles de usuarios que se van a utilizar en las reglas -->
+    <security-role>
+        <role-name>USUARIOS</role-name>
+    </security-role>
+    <security-role>
+        <role-name>ADMINISTRADORES</role-name>
+    </security-role>
+
+    <!-- Reglas de control de acceso: para impedir que accedan a las vistas de libros, salas y perfil -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Usuarios identificados</web-resource-name>
+            <url-pattern>/perfil.xhtml</url-pattern>
+            <url-pattern>/usuarios/editaUsuario.xhtml</url-pattern>
+            <url-pattern>/paginaprincipal.xhtml</url-pattern>
+            <url-pattern>/reservas/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>USUARIOS</role-name>
+            <role-name>ADMINISTRADORES</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!-- Reglas de control de acceso: para impedir la creación de salas y equipos por parte del usuario -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admins identificados</web-resource-name>
+            <url-pattern>/equipo/alta.xhtml</url-pattern>
+            <url-pattern>/equipo/editaEquipo.xhtml</url-pattern>
+            <url-pattern>/salas/alta.xhtml</url-pattern>
+            <url-pattern>/salas/editaSala.xhtml</url-pattern>
+            <url-pattern>/usuarios/index.xhtml</url-pattern>
+
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMINISTRADORES</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+</web-app>

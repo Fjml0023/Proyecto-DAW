@@ -1,0 +1,61 @@
+<ui:composition
+        template="/WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="metadata">
+        <title>Edicion de reservas </title>
+        <link rel="stylesheet" type="text/css" href="../css/formulario_de_registro.css" media="screen"/>
+        <f:metadata>
+            <f:viewParam name="id" value="#{ctrlReservas.reserva.id}"/>
+            <f:viewAction action="#{ctrlReservas.recupera()}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+
+        <div class="text-center">
+            <div class="formulario_registro">
+                <h2 class="panel-heading">Editar reserva</h2>
+
+                <f:view>
+                    <ui:fragment rendered="#{ctrlReservas.reserva != null}">
+                        <h:form class="p-4 p-md-5 border rounded-3 bg-light">
+                            <h3>ID de la reserva: <h:outputText value="#{ctrlReservas.reserva.id}" /></h3><h:inputHidden value="#{ctrlReservas.reserva.id}"/>
+                            <!--Fecha y hora-->
+                            <div class="form-floating mb-3">
+                                Fecha y hora <p:calendar id="fechaHora" value="#{ctrlReservas.reserva.freserva}" showButtonPanel="true"
+                                            pattern="dd/MM/yyyy HH" timezone="Europe/Madrid"
+                                            required="true" requiredMessage="Introduzca una fecha y hora" >
+                                </p:calendar>
+
+                                <div style="color:red"><h:message for="fechaHora" /></div>
+                            </div>
+                            <!--Duracion-->
+                            <div class="form-floating mb-3">
+                                Duracion (horas) <h:inputText class="form-control" id="duracion" value="#{ctrlReservas.reserva.duracion}"
+                                              required="true" requiredMessage="Introduzca una duración de la reserva"/>
+
+                                <div style="color: red;"><h:message for="duracion" /></div>
+                            </div>
+                            <hr class="my-4"/>
+                            <h:commandButton class="w-90 btn btn-lg btn-primary" action="#{ctrlReservas.guarda()}" value="Guardar cambios" />
+                            <h:link class="btn-danger btn btn-lg btn-primary" value="Cancelar" outcome="index"/>
+                            <hr class="my-4"/>
+                        </h:form>
+                    </ui:fragment>
+                </f:view>
+
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

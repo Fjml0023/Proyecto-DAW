@@ -1,0 +1,64 @@
+<!--listará todas las salas del catálogo-->
+<ui:composition
+        template="/WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="jakarta.tags.core"
+        xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:define name="metadata">
+        <title>salas.index </title>
+    </ui:define>
+
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+
+        <h1>Catálogo de salas</h1>
+
+        <h:form id="lista1">
+            <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <h:inputText id="Subcadena" value="#{ctrlSalas.busca}" pt:placeholder="Buscar por descripcion" required="false"/>
+                <h:commandButton class="btn btn-outline-primary btn-sm" action="#{ctrlSalas.recuperaCadena()}" value="Buscar" update="lista1"/>
+                <h:commandButton type="button" class="btn btn-outline-secondary btn-sm" value="Limpiar" onclick="document.getElementById('lista1:Subcadena').value='';"/>
+            </div>
+            <br/>
+            <ul>
+                <p:dataTable id="lista" var="sala" value="#{ctrlSalas.salastemp}">
+                    <p:column headerText="ID" sortBy="#{sala.id}">
+                        #{sala.id}
+                    </p:column>
+                    <p:column headerText="Descripcion" sortBy="#{sala.descripcion}">
+                        #{sala.descripcion}
+                    </p:column>
+                    <p:column headerText="Ubicacion" sortBy="#{sala.ubicacion}">
+                        #{sala.ubicacion}
+                    </p:column>
+                    <p:column headerText="Tamaño" sortBy="#{sala.tamano}">
+                        #{sala.tamano}
+                    </p:column>
+                    <p:column headerText="Opciones">
+                        <p:button icon="pi pi-search" title="Detalle" outcome="detalleSalas"><f:param name="id" value="#{sala.id}" /></p:button>&#160;
+                        <c:if test="#{request.isUserInRole('ADMINISTRADORES')}">
+                            <p:commandButton icon="pi pi-trash" title="Borrar" action="#{ctrlSalas.borra(sala)}" update="lista"/>
+                        </c:if>
+                    </p:column>
+                </p:dataTable>
+            </ul>
+        </h:form>
+        <div class="small" ><div class="text-center">Numero total de salas es: #{ctrlSalas.numSalas()}</div></div>
+        <br/>
+        <div class="text-center">
+            <c:if test="#{request.isUserInRole('ADMINISTRADORES')}">
+                <h:button class="w-90 btn btn-lg btn-primary" value="Dar de alta una sala" outcome="alta"/>
+            </c:if>
+        </div>
+    </ui:define>
+
+</ui:composition>
+

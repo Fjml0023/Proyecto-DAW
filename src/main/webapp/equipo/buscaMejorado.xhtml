@@ -1,0 +1,51 @@
+<ui:composition
+        template="/WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="jakarta.tags.core"
+>
+
+    <ui:define name="metadata">
+        <title>Alta de equipo </title>
+        <link rel="stylesheet" type="text/css" href="../css/formulario_de_registro.css" media="screen"/>
+    </ui:define>
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+        <div class="text-center">
+            <div class="formulario_registro">
+                <h2 class="panel-heading">Búsqueda de equipo</h2>
+                <h:form id="lista" class="p-4 p-md-5 border rounded-3 bg-light">
+                    <div>
+                        <h:inputText id="Subcadena" value="#{ctrlEquipo.busca}"
+                                     pt:placeholder="Descripcion" required="false"
+                                     requiredMessage="Busca por la descripcion de la sala">
+                        </h:inputText>
+                        <div><h:message for="Subcadena"/></div>
+                    </div>
+                    <br/>
+                    <p:commandButton class="w-90 btn btn-lg btn-primary" action="#{ctrlEquipo.recuperaCadena()}"
+                                     value="Busca" update="lista"/>
+                    <ul>
+                        <ui:repeat id="busqueda" var="l" value="#{ctrlEquipo.equipostemp}">
+                            <li><b>#{l.id}</b> #{l.descripcion}, #{l.tipo}
+                                <c:if test="#{request.isUserInRole('ADMINISTRADORES')}">
+                                <h:button class="w-90 btn btn-lg btn-primary" value="Editar" outcome="editaEquipo">
+                                    <f:param name="id" value="#{l.id}"/>
+                                </h:button>
+                                </c:if>
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </h:form>
+                <h:link class="btn-danger btn btn-lg btn-primary" value="Volver" outcome="index"/>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

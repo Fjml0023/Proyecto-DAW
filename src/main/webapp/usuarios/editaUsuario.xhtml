@@ -1,0 +1,81 @@
+<ui:composition
+        template="/WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="metadata">
+        <title>Edicion de usuario </title>
+        <link rel="stylesheet" type="text/css" href="../css/formulario_de_registro.css" media="screen"/>
+        <title>Formulario de registro </title>
+        <f:metadata>
+            <f:viewAction action="#{ctrlUsuarios.recupera(request.userPrincipal)}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+
+        <div class="text-center">
+            <main class="formulario_registro">
+                <h2 class="panel-heading">Editar Usuario</h2>
+
+                <f:view>
+                    <ui:fragment rendered="#{ctrlUsuarios.usuario != null}">
+                        <h:form class="p-4 p-md-5 border rounded-3 bg-light">
+                            <h3>ID de usuario: <h:outputText value="#{ctrlUsuarios.usuario.id}" /></h3><h:inputHidden value="#{ctrlSalas.sala.id}"/>
+                            <!--Nombre-->
+                            <div class="form-floating mb-3">
+                               Nombre <h:inputText class="form-control" id="nombre" value="${ctrlUsuarios.usuario.nombre}"
+                                              required="true" requiredMessage="El nombre es obligatorio">
+                                </h:inputText>
+                                <div style="color: red;"><h:message for="nombre" /></div>
+                            </div>
+                            <!--Contraseña-->
+                            <div class="form-floating mb-3">
+                                Contraseña <h:inputSecret class="form-control" id="contrasena" value="${ctrlUsuarios.usuario.contrasena}"
+                                                required="true" requiredMessage="La contraseña es obligatoria">
+                                </h:inputSecret>
+                                <div style="color: red;"><h:message for="contrasena" /></div>
+                            </div>
+                            <!--DNI-->
+                            <div class="form-floating mb-3">
+                                DNI <h:inputText class="form-control" id="dni" value="${ctrlUsuarios.usuario.dni}"
+                                              required="true" requiredMessage="El dni es obligatorio">
+                                </h:inputText>
+                                <div style="color: red;"><h:message for="dni"/></div>
+                            </div>
+                            <!--Email-->
+                            <div class="form-floating mb-3">
+                                Email <h:inputText class="form-control" type="email" id="email" value="${ctrlUsuarios.usuario.email}"
+                                              required="true" requiredMessage="El email es obligatorio">
+                                </h:inputText>
+                                <div style="color: red;"><h:message for="email"/></div>
+                            </div>
+                            <!--Fecha de nacimiento-->
+                            <div class="form-floating mb-3">
+                                Fecha de nacimiento <h:inputText class="form-control" p:type="date" id="fnac" value="${ctrlUsuarios.usuario.fnac}"
+                                             required="true" requiredMessage="La fecha de nacimiento es obligatoria">
+                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                                </h:inputText>
+                                <div style="color: red;"><h:message for="fnac"/></div>
+                            </div>
+
+                            <h:commandButton class="w-90 btn btn-lg btn-primary" action="#{ctrlUsuarios.guarda()}" value="Guardar cambios" />
+                            <h:link class="btn-danger btn btn-lg btn-primary" value="Cancelar" outcome="/usuarios/visualiza"/>
+                            <hr class="my-4"/>
+                        </h:form>
+                    </ui:fragment>
+                </f:view>
+
+            </main>
+        </div>
+    </ui:define>
+
+</ui:composition>
+

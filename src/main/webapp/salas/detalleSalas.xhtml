@@ -1,0 +1,53 @@
+<ui:composition
+      template="/WEB-INF/templates/layout2.xhtml"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:daw="jakarta.faces.composite/daw"
+      xmlns:c="jakarta.tags.core">
+
+    <ui:define name="metadata">
+        <title>Detalle sala</title>
+        <link rel="stylesheet" type="text/css" href="../css/formulario_de_registro.css" media="screen"/>
+
+        <f:metadata>
+            <f:viewParam name="id" required="true" value="#{ ctrlSalas.sala.id }"/>
+            <f:viewAction action="#{ ctrlSalas.recupera() }"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+<!--mostrara el detalle de una sala en particular a partir de su id-->
+        <main class="text-center">
+            <div class="formulario_registro">
+                <h2 class="panel-heading">Detalle de la sala</h2>
+                <div class="p-4 p-md-5 border rounded-3 bg-light">
+                    <ui:fragment  rendered="#{ctrlSalas.sala != null}">
+                        <daw:sala value="#{ctrlSalas.sala}"/>
+                        <br/>
+                        <h:form>
+                            <c:if test="#{request.isUserInRole('ADMINISTRADORES')}">
+                                <h:button class="w-90 btn btn-lg btn-primary" value="Editar" outcome="editaSala">
+                                    <f:param name="id" value="#{ctrlSalas.sala.id}"/>
+                                </h:button>
+
+                                <h:commandButton class="btn-danger btn btn-lg btn-primary" action="#{ctrlSalas.borra()}" value="Borrar" />
+                            </c:if>
+
+                        </h:form>
+                        <br/>
+                        <h:link class="w-90 btn btn-lg btn-primary" value="Volver" outcome="index" />
+                    </ui:fragment>
+                </div>
+            </div>
+        </main>
+    </ui:define>
+
+</ui:composition>
+
+

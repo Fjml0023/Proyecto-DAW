@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:cc="jakarta.faces.composite">
+
+    <!-- Sample Composite component for rendering a entity -->
+    
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="value"/>
+    </cc:interface>
+    
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <!--ID-->
+        <div class="form-floating mb-3">
+            <input id="id" value="#{cc.attrs.value.id}" class="form-control" readonly="readonly"/>
+            <label for="id">ID</label>
+        </div>
+        <!--Nombre-->
+        <div class="form-floating mb-3">
+            <input id="nombre" value="#{cc.attrs.value.nombre}" class="form-control" readonly="readonly"/>
+            <label for="nombre">Nombre</label>
+        </div>
+        <!--Contraseña-->
+        <div class="form-floating mb-3">
+            <input id="contrasena" value="#{cc.attrs.value.contrasena}" class="form-control" readonly="readonly"/>
+            <label for="contrasena">Contraseña</label>
+        </div>
+        <!--DNI-->
+        <div class="form-floating mb-3">
+            <input id="dni" value="#{cc.attrs.value.dni}" class="form-control" readonly="readonly"/>
+            <label for="dni">DNI</label>
+        </div>
+        <!--Email-->
+        <div class="form-floating mb-3">
+            <input id="email" value="#{cc.attrs.value.email}" class="form-control" readonly="readonly"/>
+            <label for="email">Email</label>
+        </div>
+        <!--Fecha de nacimiento-->
+        <div class="form-floating mb-3">
+            <input id="fnac" value="#{cc.attrs.value.fnac}" class="form-control" readonly="readonly"/>
+            <label for="fnac">Fecha de nacimiento</label>
+        </div>
+
+    </cc:implementation>
+</html>

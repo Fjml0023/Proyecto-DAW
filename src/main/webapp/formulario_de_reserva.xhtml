@@ -1,0 +1,103 @@
+<ui:composition
+        template="WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+   <ui:define name="metadata">
+      <link rel="stylesheet" type="text/css" href="css/formulario_de_reserva.css" media="screen"/>
+      <title>Formulario de reserva</title>
+   </ui:define>
+
+   <ui:define name="cabecera">
+      <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+   </ui:define>
+
+<ui:define name="contenido">
+
+<main class="reserva">
+
+   <h3>Formulario de reserva</h3>
+
+   <!--cambiar action para mandar los datos.-->
+   <h:form class="border rounded-3 bg-light" action="\datos formulario.php" method="post" enctype="multipart/form-data">
+
+      <div class="formulario_reserva">
+
+         <fieldset>
+            <legend>Reserva una sala</legend>
+             <br/>
+            <label for="selecidsala">Sala</label><select class="form-select" id="selecidsala" name="selec_esala">
+               <option value="" selected="selected">Elige sala</option>
+               <option value="Sala1 Planta1">Sala1 Planta1</option>
+               <option value="Sala2 Planta1">Sala2 Planta1</option>
+               <option value="Sala3 Planta1">Sala3 Planta1</option>
+               <option value="Sala4 Planta1">Sala4 Planta1</option>
+               <option value="Sala1 Planta2">Sala1 Planta2</option>
+               <option value="Sala2 Planta2">Sala2 Planta2</option>
+               <option value="Sala3 Planta2">Sala3 Planta2</option>
+               <option value="Sala4 Planta2">Sala4 Planta2</option>
+            </select>
+
+             <br/>
+            <label for="selecidhora">Duracion</label>
+            <select class="form-select" id="selecidhora" name="selec_hora">
+               <option value="1 hora" selected="selected">1 hora</option>
+               <option value="2 horas">2 horas</option>
+               <option value="3 horas">3 horas</option>
+            </select>
+
+            <br/>
+            <label for="fnac">Fecha</label>
+               <input class="form-select" type="date" id="fnac" name="Fnac" required="" value="" min="1940-01-01"
+                  max="2022-12-31"/>
+
+             <br/>
+            <label for="hora">Hora</label>
+               <input class="form-select" type="time" id="hora" name="hora" required="" value="0" max="20:00" min="08:00" step="1"/>
+
+         </fieldset>
+
+         <fieldset>
+            <legend>Reserva un equipo</legend>
+             <br/>
+            <label for="selecidequipo">Equipo</label>
+            <select class="form-select" id="selecidequipo" name="selec_equipo" required="">
+            <option value="" selected="selected">Elige equipo</option>
+            <option value="Portatil">Portatil</option>
+            <option value="Sobremesa">Sobremesa</option>
+            <option value="Tablet">Tablet</option>
+            </select>
+            <br/>
+            
+            <label for="selecidhora2">Duracion</label>
+            <select class="form-select" id="selecidhora2" name="selec_hora">
+            <option value="1 hora" selected="selected">1 hora</option>
+            <option value="2 horas">2 horas</option>
+            <option value="3 horas">3 horas</option>
+            </select>
+
+            <br/>
+            <label for="fnac2">Fecha</label>
+            <input class="form-select" type="date" id="fnac2" name="Fnac" required="" value="" min="1940-01-01"
+            max="2022-12-31" />
+
+            <br/>
+            <label for="hora2" >Hora</label>
+            <input class="form-select" type="time" id="hora2" name="hora" required="" value="0" max="20:00" min="08:00" step="1"/>
+
+         </fieldset>
+      </div>
+      <br/>
+      <button class="w-90 btn btn-lg btn-primary" type="submit" name="enviar"
+           value="Guardar cambios">Hacer reserva
+      </button>
+      <br/>
+      <hr class="my-4"/>
+   </h:form>
+
+</main>
+
+</ui:define>
+
+</ui:composition>

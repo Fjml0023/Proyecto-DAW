@@ -1,0 +1,89 @@
+<ui:composition
+        template="../WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:p="http://primefaces.org/ui">
+
+   <ui:define name="metadata">
+      <link rel="stylesheet" type="text/css" href="../css/formulario_de_registro.css" media="screen"/>
+      <title>Formulario de registro </title>
+   </ui:define>
+
+   <ui:define name="cabecera">
+      <ui:include src="/WEB-INF/templates/cabecera.xhtml"/>
+   </ui:define>
+
+   <ui:define name="contenido">
+      <div class="text-center">
+
+         <main class="formulario_registro">
+            <h3>Registro de usuario</h3>
+            <div class="formulario_registro">
+               <fieldset>
+                  <legend>Crea una cuenta en BiblioUJAapp</legend>
+
+                  <h:form class="p-4 p-md-5 border rounded-3 bg-light">
+                     <!--Nombre-->
+                     <div class="form-floating mb-3">
+                        <h:inputText class="form-control" id="nombre" value="${ctrlUsuarios.usuario.nombre}"
+                                     pt:placeholder="Nombre" required="true" requiredMessage="El nombre es obligatorio">
+                        </h:inputText>
+                        <label for="nombre">Nombre</label>
+                        <div style="color: red;"><h:message for="nombre" /></div>
+                     </div>
+                     <!--Contraseña-->
+                     <div class="form-floating mb-3">
+                        <h:inputSecret class="form-control" id="contrasena" value="${ctrlUsuarios.usuario.contrasena}"
+                                       pt:placeholder="Contraseña" required="true" requiredMessage="La contraseña es obligatoria">
+                        </h:inputSecret>
+                        <label for="contrasena">Contraseña</label>
+                        <div style="color: red;"><h:message for="contrasena" /></div>
+                     </div>
+                     <!--DNI-->
+                     <div class="form-floating mb-3">
+                        <h:inputText class="form-control" id="dni" value="${ctrlUsuarios.usuario.dni}"
+                                     pt:placeholder="83726720Y" required="true" requiredMessage="El dni es obligatorio">
+                        </h:inputText>
+                        <label for="dni">DNI</label>
+                        <div style="color: red;"><h:message for="dni"/></div>
+                     </div>
+                     <!--Email-->
+                     <div class="form-floating mb-3">
+                        <h:inputText class="form-control" type="email" id="email" value="${ctrlUsuarios.usuario.email}"
+                                     pt:placeholder="nombre@gmail.com" required="true" requiredMessage="El email es obligatorio">
+                        </h:inputText>
+                        <label for="email">Email</label>
+                        <div style="color: red;"><h:message for="email"/></div>
+                     </div>
+                     <!--Fecha de nacimiento-->
+                     <div class="form-floating mb-3">
+                        <h:inputText class="form-control" p:type="date" id="fnac" value="${ctrlUsuarios.usuario.fnac}"
+                                     required="true" requiredMessage="La fecha de nacimiento es obligatoria">
+                           <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                        </h:inputText>
+                        <label for="fnac">Fecha de nacimiento</label>
+                        <div style="color: red;"><h:message for="fnac"/></div>
+                     </div>
+
+
+                     <div class="checkbox mb-3">
+                        <label>
+                           <input type="checkbox" value="remember-me"/> Recordar datos
+                        </label>
+                     </div>
+                     <h:commandButton class="w-90 btn btn-lg btn-primary" action="#{ctrlUsuarios.crea()}" value="Registrarse" />
+
+                     <hr class="my-4"/>
+                  </h:form>
+               </fieldset>
+            </div>
+         </main>
+
+      </div>
+   </ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,46 @@
+<ui:composition
+                template="/WEB-INF/templates/layout2.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:daw="jakarta.faces.composite/daw">
+
+    <ui:define name="metadata">
+        <title>Detalle Usuario</title>
+        <link rel="stylesheet" type="text/css" href="../css/formulario_de_registro.css" media="screen"/>
+
+        <f:metadata>
+            <f:viewAction action="#{ctrlUsuarios.recupera(request.userPrincipal)}" />
+        </f:metadata>               
+    </ui:define>
+
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+        <!--mostrara el detalle de un usuario en particular a partir de su id-->
+        <main class="text-center">
+            <div class="formulario_registro">
+                <h2 class="panel-heading">Perfil de usuario</h2>
+                <div class="p-4 p-md-5 border rounded-3 bg-light">
+                    <ui:fragment  rendered="#{ctrlUsuarios.usuario != null}">
+                        <daw:usuario value="#{ctrlUsuarios.usuario}"/>
+                        <br/>
+                        <h:form>
+                            <h:button class="w-90 btn btn-lg btn-primary" value="Editar" outcome="editaUsuario">
+                                <f:param name="id" value="#{ctrlUsuarios.usuario.id}"/>
+                            </h:button>
+
+                            <h:commandButton class="btn-danger btn btn-lg btn-primary" action="#{ctrlUsuarios.borra()}" value="Borrar" />
+                        </h:form>
+                        <br/>
+                        <h:link class="w-90 btn btn-lg btn-primary" value="Volver" outcome="/paginaprincipal" />
+                    </ui:fragment>
+                </div>
+            </div>
+        </main>
+    </ui:define>
+
+</ui:composition>

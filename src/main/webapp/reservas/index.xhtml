@@ -1,0 +1,52 @@
+<!--listará todas las reservas del usuario-->
+<ui:composition
+        template="/WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="jakarta.tags.core"
+        xmlns:pt="jakarta.faces.passthrough">
+
+    <ui:define name="metadata">
+        <title>reservas.index </title>
+    </ui:define>
+
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+
+        <h1>Mis reservas</h1>
+
+        <h:form id="lista1">
+            <ul>
+                <p:dataTable id="lista" var="reserva" value="#{ctrlReservas.reservas}">
+                    <p:column headerText="ID" sortBy="#{reserva.id}">
+                        #{reserva.id}
+                    </p:column>
+                    <p:column headerText="Fecha de la reserva" sortBy="#{reserva.freserva}">
+                        #{reserva.freserva}
+                    </p:column>
+                    <p:column headerText="Duracion (horas)" sortBy="#{reserva.duracion}">
+                        #{reserva.duracion}
+                    </p:column>
+
+                    <p:column headerText="Opciones">
+                        <p:button icon="pi pi-search" title="Detalle" outcome="detalleReserva"><f:param name="id" value="#{reserva.id}" /></p:button>&#160;
+                            <p:commandButton icon="pi pi-trash" title="Borrar" action="#{ctrlReservas.borra(reserva)}" update="lista"/>
+                    </p:column>
+                </p:dataTable>
+            </ul>
+        </h:form>
+        <div class="small" ><div class="text-center">Numero total de reservas es: #{ctrlReservas.numReservas()}</div></div>
+        <br/>
+        <div class="text-center">
+            <h:button class="w-90 btn btn-lg btn-primary btn-sm" value="Reservar sala" outcome="formulario_salas"/> o
+            <h:button class="w-90 btn btn-lg btn-primary btn-sm" value="Reservar equipo" outcome="formulario_equipo"/>
+        </div>
+    </ui:define>
+
+</ui:composition>

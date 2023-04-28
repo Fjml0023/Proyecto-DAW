@@ -1,0 +1,45 @@
+<ui:composition
+        template="WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+   <ui:define name="metadata">
+      <link rel="stylesheet" type="text/css" href="css/formulario_de_registro.css" media="screen"/>
+      <title>Pagina principal </title>
+   </ui:define>
+
+   <ui:define name="cabecera">
+      <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+   </ui:define>
+
+   <ui:define name="contenido">
+      <main role="main">
+         <div class="container marketing">
+            <!-- Three columns of text below the carousel -->
+            <div class="row mt-5">
+               <div class="col-lg-4 text-center mt-5">
+                  <h:graphicImage name="Logo_Usuarios.png" library="imagenes" width="140" height="140" />
+                  <h2>Usuarios</h2>
+                  <p>Administrar usuarios de la aplicacion</p>
+                  <p class="mt-5"><h:link class="btn btn-secondary bg-dark" value="Lista de usuarios" outcome="usuarios/index"/></p>
+               </div>
+               <div class="col-lg-4 text-center mt-5">
+                  <h:graphicImage name="Logo_Sala.png" library="imagenes" width="140" height="140" />
+                  <h2>Salas</h2>
+                  <p>Administrar salas</p>
+                  <p class="mt-5"><h:link class="btn btn-secondary bg-dark" value="Catalogo de salas" outcome="salas/index"/></p>
+               </div>
+               <div class="col-lg-4 text-center mt-5">
+                  <h:graphicImage name="Logo_Equipo.png" library="imagenes" width="140" height="140" />
+                  <h2>Equipos</h2>
+                  <p>Administrar equipos</p>
+                  <p class="mt-5"><h:link class="btn btn-secondary bg-dark" value="Catalogo de equipos" outcome="/equipo/index"/></p>
+               </div>
+            </div>
+         </div>
+      </main>
+
+   </ui:define>
+
+</ui:composition>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="jakarta.tags.core">
+
+<div class="py-3 my-4">
+   <div class="text-center"><c:if test="#{not empty request.remoteUser}">
+      <hr/> <p>El usuario conectado es: #{request.remoteUser}</p>
+   </c:if>
+   </div>
+   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contacto</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+   </ul>
+</div>
+</html>

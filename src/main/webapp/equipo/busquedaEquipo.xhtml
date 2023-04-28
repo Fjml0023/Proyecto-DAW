@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+<f:view>
+    <h1>Busqueda de Equipo</h1>
+    <h:form>
+        <div>
+            <h:inputText id="Subcadena" value="#{ctrlEquipo.busca}"
+                         pt:placeholder="Descripcion" required="true"
+                         requiredMessage="Busca por la descripcion de la sala">
+            </h:inputText>
+            <div><h:message for="Subcadena" /></div>
+        </div>
+        <h:commandButton class="w-90 btn btn-lg btn-primary" action="#{ctrlEquipo.recuperaCadena()}" value="Busca" >
+            <f:ajax render="busqueda" execute="@this"/>
+        </h:commandButton>
+    </h:form>
+    <h:form>
+        <ul>
+            <ui:repeat id = "busqueda" var="l" value="#{ctrlEquipo.equipostemp}">
+                <li><b>#{l.id}</b> #{l.descripcion}, #{l.tipo}
+                    <h:link value="Editar" outcome="editaEquipo">
+                        <f:param name="id" value="${l.id}"/>
+                    </h:link>
+                </li>
+            </ui:repeat>
+        </ul>
+    </h:form>
+    <h:link class="btn-danger btn btn-lg btn-primary" value="Volver" outcome="index"/>
+</f:view>
+
+</html>

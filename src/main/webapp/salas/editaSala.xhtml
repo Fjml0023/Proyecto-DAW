@@ -1,0 +1,65 @@
+<ui:composition
+        template="/WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="metadata">
+        <title>Edicion de salas </title>
+        <link rel="stylesheet" type="text/css" href="../css/formulario_de_registro.css" media="screen"/>
+        <f:metadata>
+            <f:viewParam name="id" value="#{ctrlSalas.sala.id}"/>
+            <f:viewAction action="#{ctrlSalas.recupera()}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+
+        <div class="text-center">
+            <div class="formulario_registro">
+                <h2 class="panel-heading">Editar sala</h2>
+
+                <f:view>
+                    <ui:fragment rendered="#{ctrlSalas.sala != null}">
+                        <h:form class="p-4 p-md-5 border rounded-3 bg-light">
+                            <h3>ID de la sala: <h:outputText value="#{ctrlSalas.sala.id}" /></h3><h:inputHidden value="#{ctrlSalas.sala.id}"/>
+                            <!--Descripcion-->
+                            <div class="form-floating mb-3">
+                                Descripcion <h:inputText label="Descripcion" id="descripcion" value="#{ctrlSalas.sala.descripcion}"
+                                                          class="form-control" required="true" requiredMessage="Introduzca una descripcion">
+                            </h:inputText>
+                            <div style="color: red;"><h:message for="descripcion"/></div>
+                            </div>
+                            <!--Ubicacion-->
+                            <div class="form-floating mb-3">
+                                Ubicacion  <h:inputText label="Ubicacion" id="ubicacion" value="#{ctrlSalas.sala.ubicacion}"
+                                                         class="form-control" required="true" requiredMessage="Introduzca una ubicacion">
+                            </h:inputText>
+                            <div style="color: red;"><h:message for="ubicacion"/></div>
+                            </div>
+                            <!--Tamaño-->
+                            <div class="form-floating mb-3">
+                                Tamaño     <h:inputText label="Tamaño" id="tamano" value="#{ctrlSalas.sala.tamano}"
+                                                         class="form-control" required="true" requiredMessage="Introduzca un tamaño">
+                            </h:inputText>
+                                <div style="color: red;"><h:message for="tamano"/></div>
+                            </div>
+                            <hr class="my-4"/>
+                            <h:commandButton class="w-90 btn btn-lg btn-primary" action="#{ctrlSalas.guarda()}" value="Guardar cambios" />
+                            <h:link class="btn-danger btn btn-lg btn-primary" value="Cancelar" outcome="index"/>
+                            <hr class="my-4"/>
+                        </h:form>
+                    </ui:fragment>
+                </f:view>
+
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

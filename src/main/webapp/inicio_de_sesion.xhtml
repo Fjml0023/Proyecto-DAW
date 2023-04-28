@@ -1,0 +1,56 @@
+<ui:composition
+        template="WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="jakarta.tags.core">
+
+
+   <ui:define name="metadata">
+      <link rel="stylesheet" type="text/css" href="css/inicio_de_sesion.css" media="screen"/>
+      <title>Inicio de desion</title>
+   </ui:define>
+
+   <ui:define name="cabecera">
+      <ui:include src="/WEB-INF/templates/cabecera.xhtml"/>
+   </ui:define>
+
+   <ui:define name="contenido">
+
+      <main class="inicio_sesion">
+         <div class="text-center">
+         <h3>Inicio de sesion</h3>
+         <fieldset>
+            <legend>Por favor, identifiquese</legend>
+
+            <c:if test="#{param.error!=null}">
+               <p class="alert alert-danger">Error de autenticación</p>
+            </c:if>
+
+            <form action="j_security_check" method="post" class="p-4 p-md-5 border rounded-3 bg-light">
+               <!--Email-->
+               <div class="form-floating">
+                  <input type="text" class="form-control" id="floatingInput" name="j_username" placeholder="Usuario"/>
+                  <label for="floatingInput">Email</label>
+               </div>
+               <br/>
+               <!--Contraseña-->
+               <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingPassword" name="j_password" placeholder="Contraseña"/>
+                  <label for="floatingPassword">Contraseña</label>
+               </div>
+               <br/>
+               <!--Botones-->
+               <div class="checkbox mb-3">
+                  <label>
+                     <input type="checkbox" value="remember-me"/>Acuérdate de mí</label>
+               </div>
+               <input type="submit" value="Iniciar Sesion" class="w-90 btn btn-lg btn-primary"/>
+
+               <hr class="my-4"/>
+            </form>
+         </fieldset>
+         </div>
+      </main>
+   </ui:define>
+
+</ui:composition>

@@ -1,0 +1,49 @@
+<ui:composition
+        template="/WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:daw="jakarta.faces.composite/daw">
+
+    <ui:define name="metadata">
+        <title>Detalle reserva</title>
+        <link rel="stylesheet" type="text/css" href="../css/formulario_de_registro.css" media="screen"/>
+
+        <f:metadata>
+            <f:viewParam name="id" required="true" value="#{ ctrlReservas.reserva.id }"/>
+            <f:viewAction action="#{ ctrlReservas.recupera() }"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="cabecera">
+        <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+    </ui:define>
+
+    <ui:define name="contenido">
+        <!--mostrara el detalle de una reserva en particular a partir de su id-->
+        <main class="text-center">
+            <div class="formulario_registro">
+                <h2 class="panel-heading">Detalle de la reserva</h2>
+                <div class="p-4 p-md-5 border rounded-3 bg-light">
+                    <ui:fragment  rendered="#{ctrlReservas.reserva != null}">
+                        <daw:reserva value="#{ctrlReservas.reserva}"/>
+                        <br/>
+                        <h:form>
+
+                                <h:button class="w-90 btn btn-lg btn-primary" value="Editar" outcome="editaReserva">
+                                    <f:param name="id" value="#{ctrlReservas.reserva.id}"/>
+                                </h:button>
+
+                                <h:commandButton class="btn-danger btn btn-lg btn-primary" action="#{ctrlReservas.borra()}" value="Borrar" />
+
+                        </h:form>
+                        <br/>
+                        <h:link class="w-90 btn btn-lg btn-primary" value="Volver" outcome="index" />
+                    </ui:fragment>
+                </div>
+            </div>
+        </main>
+    </ui:define>
+
+</ui:composition>

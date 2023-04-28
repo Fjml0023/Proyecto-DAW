@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:cc="jakarta.faces.composite">
+
+<cc:interface>
+    <cc:attribute name="value"/>
+</cc:interface>
+
+<cc:implementation>
+
+    <!--ID-->
+    <div class="form-floating mb-3">
+        <input id="id" value="#{cc.attrs.value.id}" class="form-control" readonly="readonly"/>
+        <label for="id">ID</label>
+    </div>
+    <!--Descripcion-->
+    <div class="form-floating mb-3">
+        <input id="descripcion" value="#{cc.attrs.value.descripcion}" class="form-control" readonly="readonly"/>
+        <label for="descripcion">Descripcion</label>
+    </div>
+    <!--Ubicacion-->
+    <div class="form-floating mb-3">
+        <input id="tipo" value="#{cc.attrs.value.tipo}" class="form-control" readonly="readonly"/>
+        <label for="tipo">Tipo</label>
+    </div>
+</cc:implementation>
+</html>

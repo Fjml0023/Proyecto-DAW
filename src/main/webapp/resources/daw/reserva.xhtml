@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:cc="jakarta.faces.composite">
+
+<cc:interface>
+    <cc:attribute name="value"/>
+</cc:interface>
+
+<cc:implementation>
+
+    <!--ID-->
+    <div class="form-floating mb-3">
+        <input id="id" value="#{cc.attrs.value.id}" class="form-control" readonly="readonly"/>
+        <label for="id">ID</label>
+    </div>
+    <!--Fecha-->
+    <div class="form-floating mb-3">
+        <input id="fechaHora" value="#{cc.attrs.value.freserva}" class="form-control" readonly="readonly"/>
+        <label for="fechaHora">Fecha y hora</label>
+    </div>
+    <!--Duracion-->
+    <div class="form-floating mb-3">
+        <input id="duracion" value="#{cc.attrs.value.duracion}" class="form-control" readonly="readonly"/>
+        <label for="duracion">Duracion (horas)</label>
+    </div>
+
+</cc:implementation>
+</html>

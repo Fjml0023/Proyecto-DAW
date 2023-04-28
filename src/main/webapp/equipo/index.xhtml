@@ -1,0 +1,55 @@
+<ui:composition
+        template="/WEB-INF/templates/layout2.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="jakarta.tags.core"
+        xmlns:pt="jakarta.faces.passthrough"
+>
+<!--listará todos los libros del catálogo-->
+   <ui:define name="metadata">
+      <title>equipo.index </title>
+   </ui:define>
+
+   <ui:define name="cabecera">
+      <ui:include src="/WEB-INF/templates/cabecera2.xhtml"/>
+   </ui:define>
+
+   <ui:define name="contenido">
+      <h1>Catálogo de equipos</h1>
+      <h:form id="lista1">
+         <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <h:inputText id="Subcadena" value="#{ctrlEquipo.busca}" pt:placeholder="Buscar por descripcion" required="false"/>
+            <h:commandButton class="btn btn-outline-primary btn-sm" action="#{ctrlEquipo.recuperaCadena()}" value="Buscar" update="lista1"/>
+            <h:commandButton type="button" class="btn btn-outline-secondary btn-sm" value="Limpiar" onclick="document.getElementById('lista1:Subcadena').value='';"/>
+         </div>
+         <ul>
+            <p:dataTable id="lista" var="equipo" value="#{ctrlEquipo.equipostemp}">
+               <p:column headerText="ID" sortBy="#{equipo.id}">
+                  #{equipo.id}
+               </p:column>
+               <p:column headerText="Descripcion" sortBy="#{equipo.descripcion}">
+                  #{equipo.descripcion}
+               </p:column>
+               <p:column headerText="tipo" sortBy="#{equipo.tipo}">
+                  #{equipo.tipo}
+               </p:column>
+               <p:column headerText="Opciones">
+                  <p:button icon="pi pi-search" title="Detalle" outcome="detalle"><f:param name="id" value="#{equipo.id}" /></p:button>&#160;
+                   <c:if test="#{request.isUserInRole('ADMINISTRADORES')}">
+                     <p:commandButton icon="pi pi-trash" title="Borrar" action="#{ctrlEquipo.borra(equipo)}" update="lista"/>
+                   </c:if>
+               </p:column>
+            </p:dataTable>
+         </ul>
+      </h:form>
+      <div class="small" ><div class="text-center">Numero total de equipos es: #{ctrlEquipo.numEquipo()}</div></div>
+      <br/>
+      <c:if test="#{request.isUserInRole('ADMINISTRADORES')}">
+      <div class="text-center"><h:button class="w-90 btn btn-lg btn-primary" value="Dar de alta un equipo" outcome="alta"/></div>
+      </c:if>
+   </ui:define>
+</ui:composition>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="jakarta.tags.core">
+
+
+<div class="p-3 text-bg-dark">
+   <div class="cabecera">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><ui:insert name="Logo_BiblioUJAapp"><h:link outcome="/paginaprincipal.xhtml"><h:graphicImage name="Logo_sin_fondo.png" library="imagenes" height="60" title="Pagina principal" /></h:link></ui:insert></li>
+            <li><a href="https://www.ujaen.es/" class="nav-link px-2 text-white">Ujaen</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Mis Reservas</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Horarios</a></li>
+            <c:if test="#{request.isUserInRole('ADMINISTRADORES')}">
+               <li><h:button class="btn btn-warning btn-sm" value="Opciones de Desarrollador" outcome="/opcionesdesarrollador"/></li>
+            </c:if>
+         </ul>
+         <div class="text-end">
+            <c:if test="#{not empty request.remoteUser}">
+            <a><ui:insert name="Logo_Perfil"><h:link outcome="/usuarios/perfil"><h:graphicImage name="perfil.png" library="imagenes" height="60" title="Perfil" /></h:link></ui:insert></a>
+
+               <h:form>
+                  <h:commandButton class="btn btn-danger btn-sm" action="#{ctrlUsuarios.logout}" value="Cerrar sesion #{request.remoteUser}" />
+               </h:form>
+            </c:if>
+         </div>
+      </div>
+   </div>
+</div>
+</html>
